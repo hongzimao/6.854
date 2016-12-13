@@ -52,7 +52,7 @@ Instead of sorting the job based on completion time solution in LP relaxation, w
 S_j \leq 4 M^{LP}_j \:\:\:\: \forall j \in N
 \end{align}
 
-The proof for this statement can be conducted by separately considering the ``busy hours" and ``free time'' of the machines. Specifically, we denote $\mu$ as the total time before $S_j$ that \emph{all} machines are occupied by some other jobs. This separate the time span before $S_j$ into two kinds of period, busy and idle. We then separately show that the aggregation of all busy period, and idle period are \emph{both} bounded by $2M^{LP}_j$. Namely, we are to show $\mu \leq 2 M^{LP}_j$ and  $S_j - \mu \leq 2 M^{LP}_j$.
+The proof for this statement can be conducted by separately considering the ``busy hours" and ``free time'' of the machines. Specifically, we denote $\mu$ as the total time before $S_j$ that \emph{all} machines are occupied by some other jobs. This separate the time span before $S_j$ into two kinds of period, busy and idle. We then separately show that the aggregation of all busy period and idle period are \emph{both} bounded by $2M^{LP}_j$. Namely, we are to show $\mu \leq 2 M^{LP}_j$ and  $S_j - \mu \leq 2 M^{LP}_j$.
 
 The busy period is relatively straightforward. Notice that $\mu$ is upper bounded by $\sum_{i=1}^{j-1} p_i /m$, because the longest consecutive busy hour can be bounded by liquidizing the processing time of all jobs prior to $j$ and assigning them uniformly to all machines. Notice that in \eqref{eq:ch}, if we rearrange the last term in the RHS to the LHS and observe the definition of midpoint $C_j-pj/2 = M_j$, we will have 
 \begin{align}
@@ -67,14 +67,14 @@ which leads to $\mu \leq \sum_{i=1}^{j-1} p_i /m \leq 2 M^{LP}_j$ as desired.
 	\label{fig:4-approx}
 \end{figure}
 
-On the other hand for the idle period, we aim to show $S_j - \mu \leq 2 M^{LP}_j$, where the LHS is the aggregation of the time period in which at least one machine is idle. The way of reaching this bound is to group the job set that is consecutively running one after another, which in order words saturates the precedence constraints in \eqref{eq:prec}. Specifically, we denote the idle periods as $[a_h, b_h]$. Starting from $S_j$ walking backwards in time, and meet the first busy period we encounter with $b_h$ on its left boundary. We denote $v(1), v(2) .., v(s)$ as the \emph{longest} job span with $v(s)$ has its starting time $S_{v(s)}$ in this encountered busy interval and $S_{v(1)}$ falls out of the busy interval $S_{v(1)} < b_h$. The span of the consecutive jobs is illustrated in figure~\ref{fig:4-approx}. 
+On the other hand for the idle period, we aim to show $S_j - \mu \leq 2 M^{LP}_j$, where the LHS is the aggregation of the time period in which at least one machine is idle. The way of reaching this bound is to group the job set that is consecutively running one after another, which in order words saturates the precedence constraints in \eqref{eq:prec}. Specifically, we denote the idle periods as $[a_h, b_h]$. Then starting from $S_j$, we walk backwards in time, and encounter the first busy period with $b_h$ on its left boundary. We denote $v(1), v(2) .., v(s)$ as the \emph{longest} job span with $v(s)$ has its starting time $S_{v(s)}$ in this encountered busy interval and $S_{v(1)}$ falls \emph{out} of the busy interval $S_{v(1)} < b_h$. The span of the consecutive jobs is illustrated in figure~\ref{fig:4-approx}. 
 
-First notice that such $v(1)$ exists, because a job starts executing at the boundary $b_h$, and we can at least uses that job as $v(s)$. This job must br preceded on some previous job $v(s-1)$ otherwise it could have been scheduled earlier than $b_h$, since the interval to the left is idle. Secondly, $S_{v(1)}$ has to reside in a busy period $[b_g, a_{g+1})$, because otherwise some machine is idle immediately before the execution of $S_{v(1)}$ and it could have been scheduled earlier. Therefore, as shown in figure~\ref{fig:4-approx}, the span of these consecutive jobs captures some idle periods in the middle. This gives us 
+First notice that such $v(1)$ exists, because we know a job starts executing at the boundary $b_h$, and we can at least uses that job as $v(s)$. This job must br preceded on some previous job $v(s-1)$ otherwise it could have been scheduled earlier than $b_h$, since the interval to the left is idle. Secondly, $S_{v(1)}$ has to reside in a busy period $[b_g, a_{g+1})$, because otherwise some machine is idle immediately before the execution of $S_{v(1)}$ and it could have been scheduled earlier. Therefore, as shown in figure~\ref{fig:4-approx}, the span of these consecutive jobs captures some idle periods in the middle. This gives us 
 \begin{align}
 b_h - a_{g+1} \leq S_{v(s)} - S_{v(1)} = \sum_{i=1}^{s-1}(S_{v(i+1)} - S_{v(1)}) = \sum_{i=1}^{s-1} p_{v(i)}. \label{eq:jobset}
 \end{align}
 
-Now we can keep on constructing such consecutive job set spanning the next idle period backward in time, starting inside the busy period of $[b_g, a_{g+1})$ in figure~\ref{fig:4-approx}. The reason is that we can find another starting job time inside the busy period, but has its predecessor starts before $b_g$ (then from the same argument above we know the consecutive job list ends at another busy period), because we can again at least use the job starts at $b_g$ as a new $v(s)$. This way, we can add up all the consecutive time spans to cover all the idle periods. 
+Now we can keep on constructing such consecutive job set spanning the next idle period backward in time, starting inside the busy period of $[b_g, a_{g+1})$ in figure~\ref{fig:4-approx}. The reason is that we can find another starting job time inside the busy period, but has its predecessor starts before $b_g$, because we can again at least use the job starts at $b_g$ as a new $v(s)$. From the same argument above we know the consecutive job list begins at another busy period. This way, we can add up all the consecutive time spans to cover all the idle periods. 
 
 Meanwhile, the precedence constraints in \eqref{eq:prec} implies
 \begin{align}
@@ -85,6 +85,6 @@ Now \eqref{eq:jobset} and \eqref{eq:prec2} can be combined to reach,
 \begin{align}
 M^{LP}_{v(s)} - M^{LP}_{v(1)} = \sum_{i=1}^{s-1} \left(M^{LP}_{v(i+1)} - M^{LP}_{v(i)}\right) \geq \frac{1}{2}\sum_{i=1}^{s-1} p_{v(i)} \geq \frac{1}{2} (b_h-a_{g+1}),
 \end{align}
-which now allows us to aggregate all idle periods and to telescope the consecutive job sets to reach $M_j^{LP}$. 
+which now allows us to aggregate all idle periods and to telescope the consecutive job sets to bound the aggregation of $[a_1, b2), [a2, b3), .., [a_{h-1}, b_h)$ by $2M_j^{LP}$. 
 
 Now combining both busy and idle period, we reach $\mu + (S_j - \mu) \leq 2M_j^{LP} + 2M_j^{LP} = 4M_j^{LP}$, which yields the 4-approximation algorithm.
