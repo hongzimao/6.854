@@ -1,0 +1,24 @@
+\section{Integer Linear Program} \label{s:ilp}
+The general problem of $P|prec|\sum_j w_jC_j$ can be expressed as an optimization problem, which minimizes $\sum_j w_jC_j$, subject to job durations, the precedence constraints and the machine capacity constraints,
+\begin{align}
+p_j \leq C_j& \:\:\:\: \forall j, \label{eq:ptime}\\
+C_i + p_j\leq C_j&  \:\:\:\: \forall (i,j) \in E, \label{eq:prec}\\
+\sum_{j | C_j - p_j \leq t \leq C_j} 1 \leq m& \:\:\:\: \forall t \in \mathcal{T}, \label{eq:macap}
+\end{align}
+where $\mathcal{T}$ is the time horizon of scheduling these jobs and can be upper bounded by $\sum_j p_j$. 
+
+However, the constraint \eqref{eq:macap} is not written in the standard form. To do this, for each job we introduce a time-indexed variable $I_j^t = \{0, 1\}$ to express the constraints. It indicates a single point on the time line at which the job completes its execution, therefore
+\begin{align}
+\sum_t I_j^t = 1 \:\:\:\: \forall j. 
+\end{align}
+
+Notice that $\sum_t tI_j^t = C_j$ captures the time stamp of the job completion event occurring at $t$, and the objective becomes to minimize $\sum_j w_j \sum_t tI_j^t$. We can then translate the precedence constraint \eqref{eq:prec} and capacity constraint \eqref{eq:macap} as 
+\begin{align}
+\sum_t t I^t_i + p_j \leq \sum_t tI^t_j& \:\:\:\: \forall (i,j) \in E, \label{eq:prec_ti}\\
+\sum_{j} \sum_{\tau=t}^{t + p_j} I^\tau_j \leq m& \:\:\:\: \forall t \in \mathcal{T}, \label{eq:macap_ti}
+\end{align}
+where the second summation in \eqref{eq:macap_ti} effectively acts as a sweeping line to count the overlapping of job execution at each time stamp over the horizon. 
+
+This framework can be extended to include other variants of the problem. For instance, jobs may be subject to release time constraint, which can be expressed as $\sum_t tI^t_j \geq s_j + p_j$, where $s_j$ is the release time of job $j$. Also, each job may also request for multiple types of resources (e.g., CPU and RAM), then the capacity constraints \eqref{eq:macap_ti} can be extended to $\sum_{j} \sum_{\tau=t}^{t + p_j} I^\tau_j r^q_j \leq m^q, \forall q\forall t$, where $q$ is each dimension of the resource and $m^q$ is the capacity of the resource in the type $q$. In fact, multi-resource precedence constrained job\footnote{The processing time $p_j$ can actually be estimated in production clusters as a large volume of jobs is consist of recurrent jobs, where the statistics are relatively stable and can be sampled from historical data.} scheduling is suitable for practical datacenter clusters~\cite{graphene}. A production system may favor the weighed completion time of the last jobs of each job-group from different applications~\cite{tetris}, which can be included in this framework by assigning $0$ weights to all non-ending jobs.
+
+The main motivation for having this ILP formulation is to implement a baseline to compare against various approximation algorithms in the following sections. 

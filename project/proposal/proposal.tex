@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+%\maketitle
+\begin{center}
+\Large{Algorithms for Multi-Resource DAG Job Scheduling}\\
+~\\
+\large{Hongzi Mao}
+\end{center}
+~\\
+~\\
+\section*{Proposal}
+
+The problem setting of multi-resource Direct Acyclic Graph (DAG) job scheduling is suitable for practical datacenter clusters, where servers provide multiple types of resources (e.g., CPU, Memory, etc). Jobs are consist of tasks on different stages, which have dependencies on each other. Task on the dependency DAG node can start executing only when all the tasks on prior stages are finished. Each task has known resource requests and execution duration\footnote{A large volume of jobs in production datacenter clusters is consist of recurrent jobs, where the statistics are relatively stable and can be sampled from historical data.}. A job is considered finished when all its tasks are finished. A typical objective that users want can be minimize average job completion time. One more step to make the model more pragmatic is to condier the online arrival of jobs. Previous works on this domain in computer systems focus primarily on the efficiency of the implementation using a few heuristics, e.g., Packing \cite{tetris}, hardest work first \cite{graphene}, but those work lack the rigor in of the approximation bounds or competitiveness analysis of those heuristics. In this regard, this project can be designed as a mixture of reading and implementation. On the one hand, we should be able to formulate and provide an optimal solution using Integer Linear Programming (ILP), where we can have a ground truth for comparison, despite the unrealistic runtime. On the other hand, we plan to review the state of art algorithms \cite{vecbin, heuristics, bound13} for this problem in the theory side and implement some of the algorithms to compare against the ILP baseline, in real traces from practical clusters, to see how those algorithms perform in reality. 
+
+\bibliography{proposal}{}
+\bibliographystyle{plain}
+
+\end{document}

@@ -1,0 +1,132 @@
+\documentclass{article}
+
+\newenvironment{Itemize}%
+{\begin{itemize}%
+		\setlength{\itemsep}{0in}%
+		\setlength{\topsep}{-.1in}%
+		\setlength{\partopsep}{-.1in}%
+		\setlength{\parskip}{0in}}%
+	{\end{itemize}}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage[TABBOTCAP]{subfigure}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{thumbpdf}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\linespread{1.2}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+% To make the FIXMEs go away, comment out this line...
+\newcommand{\fixme}[1]{{\bf\textcolor{red}{[#1]}}}
+% ...and uncomment this one.
+%\newcommand{\fixme}[1]{}
+\newcommand{\cut}[1]{}
+\newcommand{\xref}[1]{\S\ref{#1}}
+\definecolor{darkred}{rgb}{0.7,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\hypersetup{colorlinks=true,
+	linkcolor=darkred,
+	citecolor=darkgreen}
+\newcommand{\name}{{DeepRM}\xspace}
+
+\newcommand{\hongzi}[1]{{({\color{red}HM: #1})}}
+\newcommand{\mohammad}[1]{{({\color{blue}MA: #1})}}
+\newcommand{\ishai}[1]{{({\color{green}IM: #1})}}
+
+\hypersetup{pdfstartview=FitH,pdfpagelayout=SinglePage}
+
+\setlength\paperheight {12in}
+%\setlength\paperwidth {8.5in}
+\setlength{\textheight}{9.25in}
+\setlength{\textwidth}{6.8in}
+\setlength{\oddsidemargin}{-.1in}
+\setlength{\evensidemargin}{-.1in}
+%\setlength{\headsep}{0in}
+%\pagenumbering{arabic}
+
+\lstset{
+	basicstyle=\ttfamily,
+	mathescape
+}
+
+\lstdefinestyle{customc}{
+	belowcaptionskip=1\baselineskip,
+	breaklines=true,
+	% xleftmargin=20pt,
+	language=matlab,
+	% frame=L,
+	escapeinside={@}{@},
+	showstringspaces=false,
+	basicstyle=\small\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	%identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+	% directivestyle=\color{brown},
+	%numbers=left,
+	%numberstyle=\tiny\color{gray}
+}
+
+\lstdefinestyle{customctable}{
+	aboveskip=-\medskipamount,
+	belowskip=-\medskipamount,
+	language=C,
+	escapeinside={@}{@},
+	showstringspaces=false,
+	basicstyle=\scriptsize\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	%identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+	directivestyle=\color{brown},
+}
+
+% Compact itemize and enumerate.  Note that they use the same counters and
+% symbols as the usual itemize and enumerate environments.
+\def\compactify{\itemsep=0pt \topsep=0pt \partopsep=0pt \parsep=0pt}
+\let\latexusecounter=\usecounter
+\newenvironment{CompactItemize}
+{\def\usecounter{\compactify\latexusecounter}
+	\begin{itemize}}
+	{\end{itemize}\let\usecounter=\latexusecounter}
+\newenvironment{CompactEnumerate}
+{\def\usecounter{\compactify\latexusecounter}
+	\begin{enumerate}}
+	{\end{enumerate}\let\usecounter=\latexusecounter}
+
+\title{Approximation Bounds for Precedence Constrained \\ Job Scheduling Problems}
+\author{Hongzi Mao}
+\date{December 14, 2016}
+\begin{document}
+\maketitle
+
+\input{intro}
+\input{problem}
+\input{ilp}
+\input{lpr}
+\input{bism}
+\input{impl}
+\input{conclusion}
+
+\bibliographystyle{alpha}
+\bibliography{report}
+\end{document}

@@ -1,0 +1,22 @@
+\section{Introduction} \label{s:intro}
+Scheduling problems with precedence constraints are among the most difficult
+problems in the topic of machine and job scheduling, especially in designing
+approximation algorithms. We first present an Integer Linear Program (ILP) for
+the general form $P|prec|\sum_j w_jC_j$ of the problem (\S\ref{s:ilp}), which
+minimizes the average weighted job completion time on multiple machines under
+precedence constraints. Then in \S\ref{s:lpr} we review in details of a
+4-approximation algorithm based on LP
+relaxation~\cite{queyranne2006approximation}, whose simple form of reading a
+list order from LP midpoints actually yields a general framework of
+precedence constraints. We also survey other approximation
+algorithms~\cite{chakrabarti1996improved, hoogeveen2001non} for this version of
+the problem. In the context of single machine scheduling $1|prec|\sum_j w_jC_j$
+(\S\ref{s:bism}), interestingly a simple 0-1 bipartite special instance
+effectively captures the inherent
+difficulty~\cite{woeginger2003approximability}. We review \cite{schulz2011near}
+for its new study with a probabilistic lens on the classic 0-1 bipartite
+instance, which shows a near optimal solution with large probability in balanced
+case. Finally in \S\ref{s:impl}, we implement the ILP and surveyed approximation
+algorithms to compare their performance and run time. It verifies the statement and observations in~\cite{schulz2011near} in a small scale of the experiment.
+The implementations can also be flexibly extended to express the variants of the
+problem, such as to also capture the release time constraints. 
