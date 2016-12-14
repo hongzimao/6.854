@@ -1,2 +1,16 @@
 \section{Conclusion} \label{s:conclusion}
-In this paper, we survey a journey of job scheduling problem with precedence constraints. In a general form, we presented a time-index based ILP formulation for the problem in its general case. Then we follow~\cite{queyranne2006approximation} to construct a 4-approximation algorithm based on a convex hull LP relaxation, and showed examples where it outperforms other approaches. For its examples and proof, we clear up the details and present a simpler description to show the insights and intuitions. Despite the general NP-hardness of the problem even in a 0-1 bipartite instance, we review the fresh study of~\cite{schulz2011near} with a probabilistic lens to show nearly all feasible solution is optimal with high probability, if the number of jobs are sufficiently large. Our implementation on ILP and a simple greedy list scheduling appraoch for finding feasible solution show a small scale experiment that matches with the results in this probabilistic sense. In addition, the code can also be served for further uses in benchmarking and comparing approximation algorithms. 
+In this paper, we survey a journey of job scheduling problem with precedence
+constraints. In a general form, we presented a time-index based ILP formulation
+for the problem in its general case. Then we
+follow~\cite{queyranne2006approximation} to construct a 4-approximation
+algorithm based on a convex hull LP relaxation, and showed examples where it
+outperforms other approaches. For its examples and proof, we clear up the
+details and present a simpler description to show the insights and intuitions.
+On the other hand, despite the general NP-hardness of the problem even in a 0-1
+bipartite instance, we review the fresh study of~\cite{schulz2011near} with a
+probabilistic lens to show ``nearly all'' feasible solution is optimal with high
+probability, if the number of jobs is sufficiently large. Our implementation on
+ILP and a simple greedy list scheduling appraoch for finding feasible solution
+show a small scale experiment that matches with the results in this
+probabilistic sense. In addition, the code can also be served for further uses
+in benchmarking and comparing approximation algorithms. 
