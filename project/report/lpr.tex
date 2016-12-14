@@ -69,12 +69,12 @@ which leads to $\mu \leq \sum_{i=1}^{j-1} p_i /m \leq 2 M^{LP}_j$ as desired.
 
 On the other hand for the idle period, we aim to show $S_j - \mu \leq 2 M^{LP}_j$, where the LHS is the aggregation of the time period in which at least one machine is idle. The way of reaching this bound is to group the job set that is consecutively running one after another, which in order words saturates the precedence constraints in \eqref{eq:prec}. Specifically, we denote the idle periods as $[a_h, b_h]$. Then starting from $S_j$, we walk backwards in time, and encounter the first busy period with $b_h$ on its left boundary. We denote $v(1), v(2) .., v(s)$ as the \emph{longest} job span with $v(s)$ has its starting time $S_{v(s)}$ in this encountered busy interval and $S_{v(1)}$ falls \emph{out} of the busy interval $S_{v(1)} < b_h$. The span of the consecutive jobs is illustrated in figure~\ref{fig:4-approx}. 
 
-First notice that such $v(1)$ exists, because we know a job starts executing at the boundary $b_h$, and we can at least uses that job as $v(s)$. This job must br preceded on some previous job $v(s-1)$ otherwise it could have been scheduled earlier than $b_h$, since the interval to the left is idle. Secondly, $S_{v(1)}$ has to reside in a busy period $[b_g, a_{g+1})$, because otherwise some machine is idle immediately before the execution of $S_{v(1)}$ and it could have been scheduled earlier. Therefore, as shown in figure~\ref{fig:4-approx}, the span of these consecutive jobs captures some idle periods in the middle. This gives us 
+First notice that such $v(1)$ exists, because we know a job starts executing at the boundary $b_h$, and we can at least uses that job as $v(s)$. This job must br preceded on some previous job $v(s-1)$ otherwise it could have been scheduled earlier than $b_h$, since the interval to the left is idle. Secondly, $S_{v(1)}$ has to reside in a busy period $[b_g, a_{g+1})$, otherwise some machine is idle immediately before the execution of $S_{v(1)}$ and it could have been scheduled earlier. Therefore, as shown in figure~\ref{fig:4-approx}, the span of these consecutive jobs captures some idle periods in the middle. This gives us 
 \begin{align}
 b_h - a_{g+1} \leq S_{v(s)} - S_{v(1)} = \sum_{i=1}^{s-1}(S_{v(i+1)} - S_{v(1)}) = \sum_{i=1}^{s-1} p_{v(i)}. \label{eq:jobset}
 \end{align}
 
-Now we can keep on constructing such consecutive job set spanning the next idle period backward in time, starting inside the busy period of $[b_g, a_{g+1})$ in figure~\ref{fig:4-approx}. The reason is that we can find another starting job time inside the busy period, but has its predecessor starts before $b_g$, because we can again at least use the job starts at $b_g$ as a new $v(s)$. From the same argument above we know the consecutive job list begins at another busy period. This way, we can add up all the consecutive time spans to cover all the idle periods. 
+Now we can keep on constructing such consecutive job set spanning the next idle period backward in time, starting inside the busy period of $[b_g, a_{g+1})$ in figure~\ref{fig:4-approx}. The reason is that we can find another starting job time inside the busy period, which has its predecessor starts before $b_g$, because we can again at least use the job starts at $b_g$ as a new $v(s')$. From the same argument above we know the consecutive job list begins at another busy period. This way, we can add up all the consecutive time spans to cover all the idle periods. 
 
 Meanwhile, the precedence constraints in \eqref{eq:prec} implies
 \begin{align}
@@ -87,4 +87,4 @@ M^{LP}_{v(s)} - M^{LP}_{v(1)} = \sum_{i=1}^{s-1} \left(M^{LP}_{v(i+1)} - M^{LP}_
 \end{align}
 which now allows us to aggregate all idle periods and to telescope the consecutive job sets to bound the aggregation of $[a_1, b2), [a2, b3), .., [a_{h-1}, b_h)$ by $2M_j^{LP}$. 
 
-Now combining both busy and idle period, we reach $\mu + (S_j - \mu) \leq 2M_j^{LP} + 2M_j^{LP} = 4M_j^{LP}$, which yields the 4-approximation algorithm.
+Now combining both the busy and idle period, we reach $\mu + (S_j - \mu) \leq 2M_j^{LP} + 2M_j^{LP} = 4M_j^{LP}$, which yields the 4-approximation algorithm.
