@@ -49,7 +49,7 @@ Notice that in the optimal solution, each small job in the job set $J_{h-1}$ has
 Instead of sorting the job based on completion time solution in LP relaxation, we use the midpoint from the result. The midpoint is defined as $M_j = C_j - p_j/2$. This results in a 4-approximation approximation algorithm for $P|prec|\sum w_jC_j$ as following: Let $C^{LP}$ denotes any feasible solution to the LP relaxation in \S\ref{s:lprd} and $M^{LP}$ denotes the corresponding vector of LP midpoints, let $S_j$ be the vector of start times of the feasible solution constructed by list scheduling using LP midpoints, then
 
 \begin{align}
-S_j \leq 4 M^{LP}_j \:\:\:\: \forall j \in N
+S_j \leq 4 M^{LP}_j \:\:\:\: \forall j \in N.
 \end{align}
 
 The proof for this statement can be conducted by separately considering the ``busy hours" and ``free time'' of the machines. Specifically, we denote $\mu$ as the total time before $S_j$ that \emph{all} machines are occupied by some other jobs. This separate the time span before $S_j$ into two kinds of period, busy and idle. We then separately show that the aggregation of all busy period and idle period are \emph{both} bounded by $2M^{LP}_j$. Namely, we are to show $\mu \leq 2 M^{LP}_j$ and  $S_j - \mu \leq 2 M^{LP}_j$.
